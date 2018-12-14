@@ -1,0 +1,888 @@
+﻿@model CRCWeb.Models.Interesado
+
+@{
+    /**/
+
+    /**/
+
+    /**/
+
+
+    /**/
+
+    ViewBag.Title = "Index";
+}
+<link rel="icon" type="image/png" sizes="16x16" href="~/Content/assets/images/favicon.png">
+
+<link href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/style.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/colors/blue-dark.css" id="theme" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/datatables/media/css/dataTables.bootstrap4.css">
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Buscador de Interesado</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-body">
+                    @*<h3 class="card-title">Person Info</h3>*@
+                    <hr>
+                    <div class="row p-t-20">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">DNI</label>
+                                <input type="text" id="nro_doc" class="form-control" placeholder="">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Nombre o apellido</label>
+                                <input type="text" id="apellidoPa" class="form-control" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Fecha llamada inicio</label>
+                                <input type="text" id="fechainicio" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <!--/span-->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Fecha llamada Fin</label>
+                                <input type="text" id="fechafin" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Correo</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="ti-email"></i>
+                                        </span>
+                                    </div>
+                                    <input type="email" class="form-control" id="correos" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Sede</label>
+                                <select class="form-control custom-select" id="sede" data-placeholder="Choose a Category" tabindex="1">
+                                    <option selected>Seleccione...</option>
+                                    @foreach (var item in Model.LstSedes)
+                                    {
+                                        <option value="@item.Id_Sede"> @item.Descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Forma Contacto</label>
+                                <select class="form-control custom-select" id="formacontacto" data-placeholder="Choose a Category" tabindex="1">
+                                    <option selected>Seleccione...</option>
+                                    <option value="2">Llamada</option>
+                                    <option value="3">Correo</option>
+                                    <option value="4">Visita en local</option>
+                                    <option value="5">Aplicación web</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Área de interes</label>
+                                <select class="form-control custom-select" id="AreaInteres" data-placeholder="Choose a Category" tabindex="1">
+                                    @foreach (var item in Model.LstNAreaTrabajo)
+                                    {
+                                        <option value="@item.Id_Area"> @item.Descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Usuarioa Asociado</label>
+                                <input type="text" id="usuario" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Estado</label>
+                            <select class="form-control custom-select" id="formacontacto" data-placeholder="Choose a Category" tabindex="1">
+                                <option selected>Seleccione...</option>
+                                <option value="1">No Contesto</option>
+                                <option value="2">No Esta Interesado</option>
+                                <option value="3">Citar</option>
+                                <option value="4">No Disponible</option>
+                                <option value="5">Derivar a School</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="btnBuscar" class="btn btn-success" onclick="filtroBuscar();"> <i class="fa fa-check" onclick="filtroBuscar();"></i> Buscar</button>
+
+                    @*<button class="btn btn-primary" onclick="filtroBuscar();" style="width:100%">Buscar</button>*@
+                    @*<button type="button" class="btn btn-inverse">Cancel</button>*@
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Listado de Interesados</h4>
+                @*<h6 class="card-subtitle">Listado de Interesados</h6>*@
+                <div class="table-responsive m-t-40">
+                    <table id="datatable" class="table table-bordered table-striped">
+                        <thead id="mytableinte">
+                            <tr>
+                                <th>Apellido Nombre</th>
+                                @*<th>Teléfono Fijo</th>*@
+                                <th>Teléfono Móvil</th>
+                                <th>Forma de contacto</th>
+                                <th>Usuario Asociado</th>
+                                <th>Disponible</th>
+                                <th>Estado</th>
+                                <th><center>Acciones</center></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbBody">
+
+                            @foreach (var item in Model.LstInteresados)
+                            {
+                                <tr>
+
+                                    <td data-toggle="modal" data-target='@("#modal-default-" + item.Id_Inter)'> @Html.DisplayFor(modelItem => item.Papellido)</td>
+                                    <td data-toggle="modal" data-target="#modal-default@(item.Id_Inter)"> @Html.DisplayFor(modelItem => item.TelefonoC)</td>
+                                    <td></td>
+                                    <td data-toggle="modal" data-target="#modal-default@(item.Id_Inter)"> @Html.DisplayFor(modelItem => item.usuarioasociado)</td>
+                                    <td>   <center><input type="checkbox" id="cb1" value="option1"></center></td>
+                                    <td>
+                                        @if (@item.Estado == 1)
+                                        {
+                                            <p class="nocontesto"> No Contesto </p>
+                                        }
+                                        else if (@item.Estado == 2)
+                                        {
+                                            <p class="nointeresado"> No Esta Interesado </p>
+                                        }
+                                        else if (@item.Estado == 3)
+                                        {
+                                            <p class="citar"> Citar </p>
+                                        }
+                                        else if (@item.Estado == 4)
+                                        {
+                                            <p class="nodisponible"> No Disponible </p>
+                                        }
+                                        else if (@item.Estado == 5)
+                                        {
+                                            <p class="derivarschool"> Derivar a School </p>
+                                        }
+                                        else if (@item.Estado == 6)
+                                        {
+                                            <p class="pendiente"> Pendiente </p>
+                                        }
+                                    </td>
+
+
+                                    <td>
+                                        <a href="@Url.Action("CambiarEstado", "Interesados",new {idIns = item.Id_Inter  })" class="btn btn-info"><i></i>Opciones</a>
+                                        <a href="@Url.Action("Visualizar", "Interesados",new { idIns = item.Id_Inter })" class="btn btn-warning"><i></i>Ver </a>
+                                        @*<a href="@Url.Action("Visualizar", "Interesado",new {  })" class="btn btn-info"><i></i>Correo</a>*@
+                                        <a href="@Url.Action("Visualizar", "Interesado",new {  })" class="btn btn-success"><i></i>Posesión</a>
+
+                                    </td>
+                                </tr>
+
+
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    #mdialTamanio {
+        width: 1300px !important;
+    }
+</style>
+
+@foreach (var item in Model.LstInteresados)
+{
+    var items2 = 1;
+    <div class="modal fade" id='@("modal-default-" + item.Id_Inter)' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width:1250px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle">Ficha del Interesado</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="box box-info">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header bg-info">
+                                        <h4 class="m-b-0 text-white">Datos Generales</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Tipo Doc.</label>
+                                                        <select id="tipod" class="form-control show-tick" readonly>
+                                                            <option selected>Seleccione...</option>
+                                                            <option value="1">DNI</option>
+                                                            <option value="2">CE</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Nro Doc.</label>
+                                                        <div class="form-line">
+                                                            <input type="text" id="nro_doc" value="@Model.Dni" readonly class="form-control" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Fecha nacimiento</label>
+                                                        <input type="text" class="form-control" placeholder="" id="FechaN" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Apellido Paterno</label>
+                                                        <div class="form-line">
+                                                            <input id="apellidoP" type="text" class="form-control" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Apellido Paterno</label>
+                                                        <div class="form-line">
+                                                            <input id="apellidoP" type="text" class="form-control" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Apellido Materno</label>
+                                                        <div class="form-line">
+                                                            <input id="apellidoM" type="text" class="form-control" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Nombres</label>
+                                                        <div class="form-line">
+                                                            <input type="text" id="nombres" class="form-control" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Nacionalidad</label>
+                                                    <select class="selectpicker" multiple data-style="form-control btn-success" readonly>
+                                                        <option>Mustard</option>
+                                                        <option>Ketchup</option>
+                                                        <option>Relish</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>País residencia</label>
+                                                        <select class="form-control show-tick" id="pais" readonly>
+                                                            <option selected>Seleccione...</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Correo</label>
+
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <i class="ti-email"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="email" class="form-control" id="correo" placeholder="" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Teléfono celular</label>
+                                                        <input type="text" id="TelefonoC" readonly class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Teléfono casa</label>
+                                                        <input type="text" id="TelefonoCasa" readonly class="form-control">
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Nivel Inglés</label>
+                                                        <select class="form-control show-tick" id="nivelingles" readonly>
+                                                            <option selected>Seleccione...</option>
+                                                            <option value="2">Básico</option>
+                                                            <option value="3">Intermedio</option>
+                                                            <option value="4">Avanzado</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Cómo te enteraste</label>
+                                                        <select class="form-control show-tick" id="Enteraste" readonly>
+                                                            <option selected>Seleccione...</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Interesado en</label>
+                                                        <select class="form-control show-tick" id="InteresadoEn" readonly>
+                                                            <option selected>Seleccione...</option>
+                                                            <option value="2">Trabajar en cruceros</option>
+                                                            <option value="3">Programa de inglés</option>
+                                                            <option value="4">Programa top skills</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Área de interes</label>
+                                                        <select class="form-control show-tick" id="AreaInteres" readonly>
+                                                            <option selected>Seleccione...</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Experiencia crucero</label><br />
+                                                        <input type="radio" name="group4" id="radio_36" onchange="habilitarCompania(this.value);" value="1" class="radio-col-cyan" />
+                                                        <label for="radio_36">Si</label>
+                                                        <input type="radio" name="group4" id="radio_37" onchange="habilitarCompania(this.value);" value="2" class="radio-col-cyan" />
+                                                        <label for="radio_37">No</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Compañias de crucero</label>
+                                                        <select class="form-control show-tick" id="compania" name="compania" disabled readonly>
+                                                            <option selected>Seleccione...</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Tiene tatuajes</label><br />
+                                                        <input name="group6" type="radio" id="radio_39" onchange="habilitar(this.value);" value="1" class="radio-col-cyan" />
+                                                        <label for="radio_39">Si</label>
+                                                        <input name="group6" type="radio" id="radio_40" onchange="habilitar(this.value);" value="2" class="radio-col-cyan" />
+                                                        <label for="radio_40">No</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Lugar tatuaje</label>
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" id="LugarTatu" disabled readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Foto</label>
+                                                        <input type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><br /><br />
+                                        @*<div class="row">
+                                                <div class="col-md-3">
+                                                    <button type="button" id="btnCancelar" class="btn btn-block btn-danger">Cancelar</button>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button type="button" id="btnGuardar" class="btn btn-block btn-success btnGuardar">Guardar</button>
+                                                </div>
+                                            </div>*@
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="x_title">
+                                        <div class="box-header">
+                                            <center><h3 class="box-title">Bandeja de Comentarios</h3></center>
+                                        </div>
+                                        <button id="btnNuevo" data-toggle="modal" data-target="#myModalcomentario" class="btnNuevo btn btn-success">Agregar nuevo</button>
+                                        <button id="btnHistorico" data-toggle="modal" data-target="#myModalHistorico" class="btnNuevo btn btn-success">Historico Acciones</button>
+                                    </div>
+                                    <div class="box-body">
+                                        <table id="tabcomentario" class="table table-bordered table-striped">
+                                            <thead id="mytabcoment">
+                                                <tr>
+                                                    <th class="bg-megna"><center>Comentario</center></th>
+                                                    <th class="bg-megna"><center>Usuario</center></th>
+                                                    <th class="bg-megna"><center>Acciones</center></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbBody">
+
+                                                <tr>
+                                                    <td><center>VERY GOOD ENGLISH.EXPERIENCE WASHING DISHES, VERY MOTIVATED.</center></td>
+                                                    <td><center>Patricia</center></td>
+
+                                                    <td>
+                                                        <center>
+                                                            <a href="@Url.Action("Visualizar", "Interesado",new {  })" class="btn btn-info"><i></i>Editar</a>
+                                                            <a href="@Url.Action("Visualizar", "Interesado",new {  })" class="btn btn-danger"><i></i>Eliminar</a>
+
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><center>VERY GOOD ENGLISH.EXPERIENCE WASHING DISHES, VERY MOTIVATED</center></td>
+                                                    <td><center>Patricia</center></td>
+                                                    <td>
+                                                        <center>
+                                                            <a href="@Url.Action("Visualizar", "Interesado",new {  })" class="btn btn-info"><i></i>Editar</a>
+                                                            <a href="@Url.Action("Visualizar", "Interesado",new {  })" class="btn btn-danger"><i></i>Eliminar</a>
+
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="x_title">
+                                        <div class="box-header">
+                                            <center><h3 class="box-title">Estados</h3></center>
+                                        </div>
+
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <div style="overflow-x:auto;">
+
+                                            <table id="myTableEstado" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th><center> </center></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="estado">
+                                                    <tr>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-success">No Contesto</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-success">No esta interesado</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-success">Citar</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-success">No Disponible</button>
+                                                        </td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+                <div class="modal-footer">
+                </div>
+                <br /><br />
+            </div>
+        </div>
+    </div>
+    items2++;
+}
+
+<div class="modal fade" id="myModalHistorico" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width:1250px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="box">
+                    <br />
+                    <div class="col-xs-6">
+                        <div class="x_title">
+                            <div class="box-header">
+                                <center><h3 class="box-title">Bandeja de Acciones</h3></center>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="tabacciones" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-megna"><center>Acciones</center></th>
+                                        <th class="bg-megna"><center>Usuario</center></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbBody">
+                                    <tr>
+                                        <td><center>VERY GOOD ENGLISH.EXPERIENCE WASHING DISHES, VERY MOTIVATED.</center></td>
+                                        <td><center>Patricia</center></td>
+                                    </tr>
+                                    <tr>
+                                        <td><center>VERY GOOD ENGLISH.EXPERIENCE WASHING DISHES, VERY MOTIVATED</center></td>
+                                        <td><center>Patricia</center></td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+            <br /><br />
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModalcomentario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width:1250px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="box">
+                    <br />
+                    <div class="col-xs-6">
+                        <div class="x_title">
+                            <div class="box-header">
+                                <center><h3 class="box-title">Agregue un Comentario</h3></center>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="tabmodinteresado" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-megna"><center>Comentario</center></th>
+                                        <th class="bg-megna"><center>Usuario</center></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbBody">
+                                    <tr>
+                                        <td>
+                                            <center>
+                                                <input id="comentar" type="text" class="form-control" style="width:500px">
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <input id="usuariocomentario" type="text" class="form-control" style="width:500px">
+                                            </center>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+            <br /><br />
+        </div>
+    </div>
+</div>
+
+@*MODAL AGREGAR COMENTARIO*@
+
+<script src="~/Content/assets/plugins/jquery/jquery.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/minisidebar/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="~/Content/minisidebar/js/waves.js"></script>
+<script src="~/Content/minisidebar/js/sidebarmenu.js"></script>
+<script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="~/Content/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="~/Content/minisidebar/js/custom.min.js"></script>
+
+<script src="~/Content/assets/plugins/datatables/datatables.min.js"></script>
+<script src="~/Content/assets/plugins/chartist-js/dist/chartist.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+<script>
+    var jQuery_3_3_1 = $.noConflict();
+    var $jdatatable = jQuery_3_3_1.noConflict();
+    //$(document).ready(function () {
+    //    $('#myTable').DataTable();
+    //    $(document).ready(function () {
+    //        var table = $('#example').DataTable({
+    //            "columnDefs": [{
+    //                "visible": false,
+    //                "targets": 2
+    //            }],
+    //            "order": [
+    //                [2, 'asc']
+    //            ],
+    //            "displayLength": 25,
+    //            "drawCallback": function (settings) {
+    //                var api = this.api();
+    //                var rows = api.rows({
+    //                    page: 'current'
+    //                }).nodes();
+    //                var last = null;
+    //                api.column(2, {
+    //                    page: 'current'
+    //                }).data().each(function (group, i) {
+    //                    if (last !== group) {
+    //                        $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+    //                        last = group;
+    //                    }
+    //                });
+    //            }
+    //        });
+    //        // Order by the grouping
+    //        $('#example tbody').on('click', 'tr.group', function () {
+    //            var currentOrder = table.order()[0];
+    //            if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+    //                table.order([2, 'desc']).draw();
+    //            } else {
+    //                table.order([2, 'asc']).draw();
+    //            }
+    //        });
+    //    });
+    //});
+
+     function filtroBuscar() {
+        var Datos = {
+            sede: $("#sede").val(),
+            usuario: $("#usuario").val(),
+            correo: $("#correo").val(),
+
+        };
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("/FiltrarInteresado")',
+            data: JSON.stringify(Datos),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (lista) {
+                var tb = $jdatatable("#datatable").DataTable();
+                tb.clear();
+
+                $('#tbBody').html('');
+
+                for (var i = 0; i < lista.length; i++) {
+
+                    var estado = "";
+                    var acciones = "";
+                    var formacontacto = "";
+                    var disponible = "";
+                    if(lista[i].Estado == 1)
+                       {
+                        estado = ' <p class="nocontesto"> No Contesto </p>';
+                    } else if (lista[i].Estado == 2) {
+
+                        estado = '<p class="nointeresado"> nointeresado </p>';
+                    }
+                    else if (lista[i].Estado == 3) {
+                        estado = '<p class="citar"> citar </p>';
+                    }
+                    else if (lista[i].Estado == 4) {
+                        estado = '<p class="nodisponible"> nodisponible </p>';
+                    }
+                    else if (lista[i].Estado == 5) {
+                        estado = '<p class="derivarschool"> derivarschool </p>';
+                    }
+                    else if (lista[i].Estado == 6) {
+                        estado = '<p class="pendiente"> pendiente </p>';
+                    }
+    
+                    acciones = '<a href="@Url.Action("CambiarEstado", "Interesados")?idIns=' + lista[i].Id_Inter + '" class="btn btn-info"><i></i> Opciones </a>' ;
+                    acciones += '<a href="@Url.Action("Visualizar", "Interesados")?idIns=' + lista[i].Id_Inter + '" class="btn btn-warning"><i></i> Ver </a>';
+                    acciones += '<a href="@Url.Action("Visualizar", "Interesados")?idIns=' + lista[i].Id_Inter + '" class="btn btn-success"><i></i> Posesión </a>'; ;
+                               
+                                tb.row.add([
+                                    lista[i].Papellido,
+                                    lista[i].TelefonoC,
+                                    formacontacto,
+                                    lista[i].usuarioasociado,
+                                     disponible,
+                                    estado,
+                                    acciones
+                                  ]).draw();
+
+
+
+
+
+
+                }
+            }
+        });
+    }
+    $jdatatable(document).ready(function () {
+        // dataTable.clear();
+        $jdatatable('#datatable').DataTable(
+            {
+                "columnDefs": [
+                    { "className": "dt-center", "targets": "_all" }
+                ],
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ Registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ ",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar: ",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                "ordering": false
+            });
+    });
+</script>
+
+
+<script type="text/javascript">
+           // var jQuery_3_3_1 = $.noConflict();
+            //var $jdatatable = jQuery_3_3_1.noConflict();
+
+
+
+</script>
+
+<!-- ============================================================== -->
+<!-- Style switcher -->
+<!-- ============================================================== -->
+<script src="~/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DesarrolloCRCSecurity-Web.config Connection String" description="DesarrolloCRCSecurity Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="Data Server=tcp:crcserver.database.windows.net,1433;Initial Catalog=DBCRC;Persist Security Info=False;User ID=VITADMIN;Password=VisionIT2018;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Kari\\Desktop\\BACKUP\ CRC\\CRC\\CRC\\CRCAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DesarrolloCRCSecurity']/@connectionString" />
+  </parameter>
+</parameters>

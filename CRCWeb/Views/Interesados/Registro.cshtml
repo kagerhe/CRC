@@ -1,0 +1,459 @@
+﻿@model CRCWeb.Models.Interesado
+
+<link href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+@*<link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/datatables/media/css/dataTables.bootstrap4.css">*@
+<link href="~/Content/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+<!-- Main content -->
+<link href="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/multiselect/css/multi-select.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/style.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/colors/blue-dark.css" id="theme" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/pages/dashboard1.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+
+
+<link href="~/Content/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/style.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/colors/blue-dark.css" id="theme" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/datatables/media/css/dataTables.bootstrap4.css">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Datos Generales</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-body">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tipo Doc.</label>
+                                <select id="tipod" class="form-control show-tick">
+                                    <option selected>Seleccione...</option>
+                                    <option value="1">DNI</option>
+                                    <option value="2">CE</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Nro Doc.</label>
+                                <div class="form-line">
+                                    <input type="text" id="nro_doc" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Fecha nacimiento</label>
+                                <input type="text" class="form-control" placeholder="" id="FechaN">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Apellido Paterno</label>
+                                <div class="form-line">
+                                    <input id="apellidoP" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Apellido Materno</label>
+                                <div class="form-line">
+                                    <input id="apellidoM" type="text" class="form-control">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Nombres</label>
+                                <div class="form-line">
+                                    <input type="text" id="nombres" class="form-control">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*</div>*@
+
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <label>Nacionalidad</label>
+                            <select class="selectpicker" multiple data-style="form-control btn-success">
+                                <option>Mustard</option>
+                                <option>Ketchup</option>
+                                <option>Relish</option> @*@foreach (var item in Model.LstNacionalidad)
+                                    {
+                                        <option value="@item.Id_Nac"> @item.Descripcion</option>
+                                    }*@
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>País residencia</label>
+                                <select class="form-control show-tick" id="pais">
+                                    <option selected>Seleccione...</option>
+                                    @foreach (var item in Model.LstPais)
+                                    {
+                                        <option value="@item.Id_Pais"> @item.DescripcionP</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Correo</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="ti-email"></i>
+                                        </span>
+                                    </div>
+                                    <input type="email" class="form-control" id="correo" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Teléfono celular</label>
+                                <input type="text" id="TelefonoC" class="form-control">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Teléfono casa</label>
+                                <input type="text" id="TelefonoCasa" class="form-control">
+
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Nivel Inglés</label>
+                                <select class="form-control show-tick" id="nivelingles">
+                                    <option selected>Seleccione...</option>
+                                    <option value="2">Básico</option>
+                                    <option value="3">Intermedio</option>
+                                    <option value="4">Avanzado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Cómo te enteraste</label>
+                                <select class="form-control show-tick" id="Enteraste">
+                                    <option selected>Seleccione...</option>
+                                    @foreach (var item in Model.LstAreaInformacion)
+                                    {
+                                        <option value="@item.Id_AreaI"> @item.Descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Interesado en</label>
+                                <select class="form-control show-tick" id="InteresadoEn">
+                                    <option selected>Seleccione...</option>
+                                    <option value="2">Trabajar en cruceros</option>
+                                    <option value="3">Programa de inglés</option>
+                                    <option value="4">Programa top skills</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Área de interes</label>
+                                <select class="form-control show-tick" id="AreaInteres">
+                                    <option selected>Seleccione...</option>
+                                    @foreach (var item in Model.LstNAreaTrabajo)
+                                    {
+                                        <option value="@item.Id_Area"> @item.Descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Experiencia crucero</label><br />
+                                <input type="radio" name="group4" id="radio_36" onchange="habilitarCompania(this.value);" value="1" class="radio-col-cyan" />
+                                <label for="radio_36">Si</label>
+                                <input type="radio" name="group4" id="radio_37" onchange="habilitarCompania(this.value);" value="2" class="radio-col-cyan" />
+                                <label for="radio_37">No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Compañias de crucero</label>
+                                <select class="form-control show-tick" id="compania" name="compania" disabled>
+                                    <option selected>Seleccione...</option>
+                                    @foreach (var item in Model.LstCompania)
+                                    {
+                                        <option value="@item.Id_Compania"> @item.Descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tiene tatuajes</label><br />
+                                <input name="group6" type="radio" id="radio_39" onchange="habilitar(this.value);" value="1" class="radio-col-cyan" />
+                                <label for="radio_39">Si</label>
+                                <input name="group6" type="radio" id="radio_40" onchange="habilitar(this.value);" value="2" class="radio-col-cyan" />
+                                <label for="radio_40">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Lugar tatuaje</label>
+                            <div class="form-line">
+                                <input type="text" class="form-control" id="LugarTatu" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Sede</label>
+                                <select class="form-control show-tick" id="sede" name="sede">
+                                    <option selected>Seleccione...</option>
+                                    @foreach (var item in Model.LstSedes)
+                                    {
+                                        <option value="@item.Id_Sede"> @item.Descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Foto</label>
+                                <input type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp">
+                            </div>
+                        </div>
+                    </div>
+                </div><br /><br />
+                <div class="row">
+                    <div class="col-md-3">
+                        <button type="button" id="btnCancelar" class="btn btn-block btn-danger">Cancelar</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" id="btnGuardar" class="btn btn-block btn-success btnGuardar">Guardar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Content/assets/plugins/jquery/jquery.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/minisidebar/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="~/Content/minisidebar/js/waves.js"></script>
+<script src="~/Content/minisidebar/js/sidebarmenu.js"></script>
+<script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="~/Content/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="~/Content/minisidebar/js/custom.min.js"></script>
+<script src="~/Content/assets/plugins/moment/moment.js"></script>
+
+<script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
+<script src="~/Content/assets/plugins/chartist-js/dist/chartist.min.js"></script>
+<script src="~/Content/assets/plugins/datatables/datatables.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="~/Content/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js"></script>
+<script src="~/Content/assets/plugins/dff/dff.js"></script>
+<script src="~/Content/minisidebar/js/dashboard1.js"></script>
+<script src="~/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+<script src="~/Content/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
+<script src="~/Content/assets/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Content/assets/plugins/sweetalert/jquery.sweet-alert.custom.js"></script>
+<script src="~/Content/JsController/Interesado/RegistroInteresado.js"></script>
+@*<script type="text/javascript">
+        var jQuery_3_3_1 = $.noConflict();
+    </script>*@
+<script>
+    // MAterial Date picker
+    $('#FechaN').bootstrapMaterialDatePicker({ weekStart: 0, time: false, format: 'DD/MM/YYYY' });
+    $('#timepicker').bootstrapMaterialDatePicker({ format: 'HH:mm', time: true, date: false });
+    $('#date-format').bootstrapMaterialDatePicker({ format: 'dddd DD MMMM YYYY - HH:mm' });
+    $('#min-date').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', minDate: new Date() });
+
+    // Date Picker
+    jQuery('.mydatepicker, #datepicker').datepicker();
+    jQuery('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+    jQuery('#date-range').datepicker({
+        toggleActive: true
+    });
+    jQuery('#datepicker-inline').datepicker({
+        todayHighlight: true
+    });
+
+
+
+</script>
+
+<script>
+
+    function habilitar(value) {
+        if (value == "1") {
+            // habilitamos
+            document.getElementById("LugarTatu").disabled = false;
+        } else if (value == "2") {
+            // deshabilitamos
+            document.getElementById("LugarTatu").disabled = true;
+        }
+    }
+    function habilitarCompania(value) {
+        if (value == "1") {
+            // habilitamos
+            document.getElementById("compania").disabled = false;
+        } else if (value == "2") {
+            ////    // deshabilitamos
+            document.getElementById("compania").disabled = true;
+        }
+    }
+</script>
+
+<script>
+    jQuery(document).ready(function () {
+        // Switchery
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        $('.js-switch').each(function () {
+            new Switchery($(this)[0], $(this).data());
+        });
+        // For select 2
+        $(".select2").select2();
+        $('.selectpicker').selectpicker();
+        //Bootstrap-TouchSpin
+        $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        var vspinTrue = $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        if (vspinTrue) {
+            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+        }
+        $("input[name='tch1']").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 0.1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '%'
+        });
+        $("input[name='tch2']").TouchSpin({
+            min: -1000000000,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000,
+            prefix: '$'
+        });
+        $("input[name='tch3']").TouchSpin();
+        $("input[name='tch3_22']").TouchSpin({
+            initval: 40
+        });
+        $("input[name='tch5']").TouchSpin({
+            prefix: "pre",
+            postfix: "post"
+        });
+        // For multiselect
+        $('#pre-selected-options').multiSelect();
+        $('#optgroup').multiSelect({
+            selectableOptgroup: true
+        });
+        $('#public-methods').multiSelect();
+        $('#select-all').click(function () {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').click(function () {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#refresh').on('click', function () {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function () {
+            $('#public-methods').multiSelect('addOption', {
+                value: 42,
+                text: 'test 42',
+                index: 0
+            });
+            return false;
+        });
+        $(".ajax").select2({
+            ajax: {
+                url: "https://api.github.com/search/repositories",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            //templateResult: formatRepo, // omitted for brevity, see the source of this page
+            //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+    });
+</script>

@@ -1,0 +1,1030 @@
+﻿
+@{
+    ViewBag.Title = "Registro";
+}
+
+<link href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+@*<link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/datatables/media/css/dataTables.bootstrap4.css">*@
+<link href="~/Content/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+<!-- Main content -->
+<link href="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/multiselect/css/multi-select.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet" />
+@*<link href="~/Content/minisidebar/css/style.css" rel="stylesheet" />*@
+<link href="~/Content/minisidebar/css/colors/blue-dark.css" id="theme" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/pages/dashboard1.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/pages/tab-page.css" rel="stylesheet" />
+
+
+<link rel="icon" type="image/png" sizes="16x16" href="~/Content/assets/images/favicon.png">
+
+
+<link href="~/Content/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/style.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/colors/blue-dark.css" id="theme" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/datatables/media/css/dataTables.bootstrap4.css">
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Datos Generales</h4>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="alert alert-info alert-rounded">
+                                Complete el siguiente formulario colocando los datos tal como aparecen en su pasaporte o documento de identidad.
+                            </div>
+
+                            <ul class="nav nav-pills m-t-30 m-b-30">
+                                <li class=" nav-item"> <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Información Personal</a> </li>
+                                <li class="nav-item"> <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Información Personal</a> </li>
+                                <li class="nav-item"> <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="true">Información Educativa</a> </li>
+                                <li class="nav-item"> <a href="#navpills-4" class="nav-link" data-toggle="tab" aria-expanded="true">Certificaciones</a> </li>
+                                <li class="nav-item"> <a href="#navpills-5" class="nav-link" data-toggle="tab" aria-expanded="true">Experiencia laboral</a> </li>
+                                <li class="nav-item"> <a href="#navpills-6" class="nav-link" data-toggle="tab" aria-expanded="true">Información Médica</a> </li>
+                                <li class="nav-item"> <a href="#navpills-7" class="nav-link" data-toggle="tab" aria-expanded="true">Visa</a></li>
+                                <li class="nav-item"> <a href="#navpills-8" class="nav-link" data-toggle="tab" aria-expanded="true">Adjuntar Documentos</a> </li>
+
+                            </ul>
+                            <div class="tab-content br-n pn">
+                                <div id="navpills-1" class="tab-pane active">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Apellido Paterno</label>
+                                                <div class="form-line">
+                                                    <input id="apellidoP" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Apellido Materno</label>
+                                                <div class="form-line">
+                                                    <input id="apellidoM" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Nombres</label>
+                                                <div class="form-line">
+                                                    <input type="text" id="nombres" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Fecha nacimiento</label>
+                                                <input type="text" class="form-control" placeholder="" id="FechaN">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Nacionalidad</label>
+                                            <select class="selectpicker" multiple data-style="form-control btn-success">
+                                                <option>Mustard</option>
+                                                <option>Ketchup</option>
+                                                <option>Relish</option> @*@foreach (var item in Model.LstNacionalidad)
+                        {
+                            <option value="@item.Id_Nac"> @item.Descripcion</option>
+                        }*@
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Dirección</label>
+                                                <div class="form-line">
+                                                    <input id="direccion" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Ciudad de residencia</label>
+                                                <div class="form-line">
+                                                    <input id="ciudadresi" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Pais de residencia</label>
+                                                <div class="form-line">
+                                                    <input id="paisresi" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Aeropuerto internacional mas cercano</label>
+                                                <select class="form-control show-tick" id="aeropuerto">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="2">Lima</option>
+                                                    <option value="3"></option>
+                                                    <option value="4"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Dni</label>
+                                                <div class="form-line">
+                                                    <input id="dni" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Carnet de extranjeria</label>
+                                                <div class="form-line">
+                                                    <input id="carnet" type="text" class="form-control">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Correo</label>
+
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <i class="ti-email"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="email" class="form-control" id="correo" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="list-inline pull-right">
+
+                                            <li><button type="button" class="btn btn-primary next-step">Siguiente</button></li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                                <div id="navpills-2" class="tab-pane">
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Teléfono celular</label>
+                                                <input type="text" id="TelefonoC" class="form-control">
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Teléfono fijo</label>
+                                                <input type="text" id="TelefonoCasa" class="form-control">
+
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Otro Teléfono</label>
+                                                <input type="text" id="otrotlf" class="form-control">
+
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>En caso de emergencia</label>
+                                                <input type="text" id="tlfemergencia" class="form-control">
+
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Teléfono de contacto</label>
+                                                <div class="input-group">
+
+                                                    <input type="text" id="contactotlf" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Parentesco</label>
+                                                <div class="form-line">
+                                                    <input id="parentesco" type="text" class="form-control">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Número pasaporte</label>
+                                                <div class="form-line">
+                                                    <input id="pasaporte" type="text" class="form-control">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Fecha expiración pasaporte</label>
+                                                <input type="text" class="form-control" placeholder="" id="caducidad">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Como se enteró de CRC-PERU</label>
+                                                <select class="form-control show-tick" id="aeropuerto">
+                                                    <option selected>Seleccione...</option>
+                                                    @foreach (var item in Model.LstAreaInformacion)
+                                                    {
+                                                        <option value="@item.Id_AreaI"> @item.Descripcion</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Foto</label>
+                                                <input type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Estado civil</label>
+                                                <select class="form-control show-tick" id="estadocivil">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">Soltero</option>
+                                                    <option value="2">Casado</option>
+                                                    <option value="3">Otro</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label> Po qué quiere trabajar en cruceros</label>
+                                                <select class="form-control show-tick" id="estadocivil">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">Nueva experiencia</option>
+                                                    <option value="2">Viajar</option>
+                                                    <option value="3">Conocer gente</option>
+                                                    <option value="4">Aprender</option>
+                                                    <option value="5">Ahorrar</option>
+                                                    <option value="6">Ganar más dinero</option>
+                                                    <option value="7">Volver a bordo</option>
+                                                    <option value="8">Adquirir experiencia internacional</option>
+                                                    <option value="9">Trabajar en lo que me gusta</option>
+                                                    <option value="10">Ayudar a la familia</option>
+                                                    <option value="11">Pagar estudios</option>
+                                                    <option value="12">Sueños</option>
+                                                    <option value="13">Otros</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-primary prev-step">Anterior</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step">Siguiente</button></li>
+                                        @*<li><button type="button" id="btnGuardarBorrador" class="btn btn-danger  btn-info-full btnGuardarBorrador">Guardar Borrador</button></li>
+                <li><button type="button" id="btnGuardar" class="btn btn-primary btn-info-full btnGuardar">Guardar final</button></li>*@
+                                    </ul>
+                                </div>
+                                <div id="navpills-3" class="tab-pane">
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Estudios superiores</label>
+                                                <select class="form-control show-tick" id="estadocivil">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">Si</option>
+                                                    <option value="2">No</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Institución</label>
+                                                <div class="form-line">
+                                                    <input id="institucion" type="text" class="form-control">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Fecha inicio</label>
+                                                <input type="text" class="form-control" placeholder="" id="Fechainic">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Fecha culminación</label>
+                                                <input type="text" class="form-control" placeholder="" id="Fechaculm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Carrera</label>
+                                                <div class="form-line">
+                                                    <input id="carrera" type="text" class="form-control">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Otros estudios superiores</label>
+                                                <div class="form-line">
+                                                    <input id="otrosestudios" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-primary prev-step">Anterior</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step">Siguiente</button></li>
+                                        @*<li><button type="button" id="btnGuardarBorrador" class="btn btn-danger  btn-info-full btnGuardarBorrador">Guardar Borrador</button></li>
+                <li><button type="button" id="btnGuardar" class="btn btn-primary btn-info-full btnGuardar">Guardar final</button></li>*@
+                                    </ul>
+                                </div>
+
+                                <div id="navpills-4" class="tab-pane">
+                                    <div class="alert alert-info alert-rounded">
+                                        <p>Colocar aquí cursos de postgrado, diplomados o especializaciones.</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Certificaicoens</label>
+                                            <div class="controls">
+                                                <textarea name="textarea" id="textarea" class="form-control" required placeholder="Textarea text"></textarea>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-primary prev-step">Anterior</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step">Siguiente</button></li>
+                                        @*<li><button type="button" id="btnGuardarBorrador" class="btn btn-danger  btn-info-full btnGuardarBorrador">Guardar Borrador</button></li>
+                <li><button type="button" id="btnGuardar" class="btn btn-primary btn-info-full btnGuardar">Guardar final</button></li>*@
+                                    </ul>
+
+                                </div>
+                                <div id="navpills-5" class="tab-pane">
+                                    <div class="alert alert-info alert-rounded">
+                                        <p>Por favor ingrese su experiencia laboral empezando por la MAS RECIENTE y retrocediendo en orden cronológico hasta la más antigua. Puede incluir programas de intercambio y/o pasantías.</p>
+                                    </div>
+                                    <div class="row">
+                                        @*<div class="col-md-12">
+                    <div class="controls">
+                        <textarea name="textarea" id="certificaiones" class="form-control" required placeholder="Textarea text"></textarea>
+                    </div>
+                </div>*@
+
+
+
+                                        <div class="col-xs-8">
+                                            <button id="btnNuevo" class="btn btn-success">Agregar nuevo</button><br />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="x_content">
+                                            <div style="overflow-x:auto;">
+                                                <table id="myTable" class="table table-condensed table-bordered">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="bg-primary"><center>#</center></th>
+                                                            <th class="bg-primary"><center>Nombre de la empresa/</center></th>
+                                                            <th class="bg-primary"><center>Ciudad</center></th>
+
+                                                            <th class="bg-primary"><center>País</center></th>
+
+                                                            <th class="bg-primary"><center>Fecha desde</center></th>
+                                                            <th class="bg-primary"><center>Decha hasta</center></th>
+
+                                                            <th class="bg-primary"><center>Puesto Desempeñado</center></th>
+                                                            <th class="bg-primary"><center>Descripción de Funciones</center></th>
+                                                            <th class="bg-primary"><center>Experiencia en Cruceros</center></th>
+                                                            <th class="bg-primary"><center>Experience</center></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+
+                                                            <td style="display: none;">
+                                                                <input type="text" class="form-control" name="ContadorRow" id="1" value="" />
+                                                            </td>
+                                                            <th scope="row"><button disabled type="button" class="removebutton" title="Remove this row">X</button></th>
+                                                            <td>
+                                                                <input id="nombreempresa" type="text" class="form-control" style="width:130px">
+
+                                                            </td>
+                                                            <td>
+                                                                <input id="ciudad" type="text" class="form-control" style="width:130px">
+
+                                                            </td>
+                                                            <td>
+                                                                <input id="pais" type="text" class="form-control" style="width:130px">
+
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group date">
+                                                                    <div class="input-group-addon">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                    </div>
+                                                                    <input type="text" class="form-control pull-right" id="Fechadesde" style="width:130px">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group date">
+                                                                    <div class="input-group-addon">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                    </div>
+                                                                    <input type="text" class="form-control pull-right" id="Fechahasta" style="width:130px">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <input id="puesto" type="text" class="form-control" style="width:140px">
+                                                            </td>
+                                                            <td>
+                                                                <input id="funciones" type="text" class="form-control" style="width:140px">
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-control show-tick" id="experienciacrucero" style="width:140px">
+                                                                    <option selected>Seleccione...</option>
+                                                                    <option value="1">Si</option>
+                                                                    <option value="2">No</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <center><button style="width:120px" href="#" onclick=";" data-toggle="modal" data-target="#myModalExperiencia" data-backdrop="static" data-keyboard="false" class="btn btn-primary"><i class="fa fa-folder"></i> Agregar Experiencia </button></center>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-primary prev-step">Anterior</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step">Siguiente</button></li>
+                                        @*<li><button type="button" id="btnGuardarBorrador" class="btn btn-danger  btn-info-full btnGuardarBorrador">Guardar Borrador</button></li>
+                <li><button type="button" id="btnGuardar" class="btn btn-primary btn-info-full btnGuardar">Guardar final</button></li>*@
+                                    </ul>
+
+                                </div>
+
+
+                                <div id="navpills-6" class="tab-pane">
+                                    <div class="alert alert-info alert-rounded">
+                                        <p>Ha sufrido o sufre de:</p>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Epilepsia</label>
+                                                <select class="form-control show-tick" id="epilexia">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="2">Si</option>
+                                                    <option value="3">No</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Especifique</label>
+                                                <div class="form-line">
+                                                    <input type="text" id="epile" class="form-control" disabled>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Desorden nervioso-neurológico </label>
+                                                <select class="form-control show-tick" id="desorden">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="2">Si</option>
+                                                    <option value="3">No</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Especifique</label>
+                                                <div class="form-line">
+                                                    <input type="text" id="desordenneuro" class="form-control" disabled>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Problema lumbar de columna </label>
+                                                <select class="form-control show-tick" id="lumbar">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="2">Si</option>
+                                                    <option value="3">No</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Especifique</label>
+                                                <div class="form-line">
+                                                    <input type="text" id="problemalumbar" class="form-control" disabled>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Cirugia mayor</label>
+                                                <select class="form-control show-tick" id="cirugia">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="2">Si</option>
+                                                    <option value="3">No</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Especifique</label>
+                                                <div class="form-line">
+                                                    <input type="text" id="cirugiam" class="form-control" disabled>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Enfermedad Crónica</label>
+                                                <select class="form-control show-tick" id="enfermedadc">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="2">Si</option>
+                                                    <option value="3">No</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Especifique</label>
+                                                <div class="form-line">
+                                                    <input type="text" id="enfermedadcro" class="form-control" disabled>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Tiene tatuajes en brazos o piernas?: </label>
+                                                <select class="form-control show-tick" id="tato">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="2">Si</option>
+                                                    <option value="3">No</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Especifique</label>
+                                            <div class="form-line">
+                                                <input type="text" id="lugartato" class="form-control" disabled>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div id="navpills-7" class="tab-pane">
+                                    @*<div class="alert alert-info alert-rounded">
+                <p>Colocar aquí cursos de postgrado, diplomados o especializaciones.</p>
+            </div>*@
+                                    <div class="alert alert-info alert-rounded">
+                                        <p class="text-green">Leyenda: A1-basic, A2-intermediate basic, B1-intermediate, B2-advanced, C1-near native, C2-native speake</p>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Tiene C1/D vigente</label>
+                                                <select class="form-control show-tick" id="tato">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">Si</option>
+                                                    <option value="2">No</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Expira en</label>
+                                                <input type="text" class="form-control" placeholder="" id="expira">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Inglés</label>
+                                                <select class="form-control show-tick" id="ingles">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">A1</option>
+                                                    <option value="2">A2</option>
+                                                    <option value="3">B1</option>
+                                                    <option value="4">B2</option>
+                                                    <option value="5">C1</option>
+                                                    <option value="6">C2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Italiano</label>
+                                                <select class="form-control show-tick" id="italiano">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">A1</option>
+                                                    <option value="2">A2</option>
+                                                    <option value="3">B1</option>
+                                                    <option value="4">B2</option>
+                                                    <option value="5">C1</option>
+                                                    <option value="6">C2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Francés</label>
+                                                <select class="form-control show-tick" id="frances">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">A1</option>
+                                                    <option value="2">A2</option>
+                                                    <option value="3">B1</option>
+                                                    <option value="4">B2</option>
+                                                    <option value="5">C1</option>
+                                                    <option value="6">C2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Alemán</label>
+                                                <select class="form-control show-tick" id="aleman">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">A1</option>
+                                                    <option value="2">A2</option>
+                                                    <option value="3">B1</option>
+                                                    <option value="4">B2</option>
+                                                    <option value="5">C1</option>
+                                                    <option value="6">C2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Portugues</label>
+                                                <select class="form-control show-tick" id="portugues">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">A1</option>
+                                                    <option value="2">A2</option>
+                                                    <option value="3">B1</option>
+                                                    <option value="4">B2</option>
+                                                    <option value="5">C1</option>
+                                                    <option value="6">C2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Chino Mandarín</label>
+                                                <select class="form-control show-tick" id="chino">
+                                                    <option selected>Seleccione...</option>
+                                                    <option value="1">A1</option>
+                                                    <option value="2">A2</option>
+                                                    <option value="3">B1</option>
+                                                    <option value="4">B2</option>
+                                                    <option value="5">C1</option>
+                                                    <option value="6">C2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-primary prev-step">Anterior</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step">Siguiente</button></li>
+                                        @*<li><button type="button" id="btnGuardarBorrador" class="btn btn-danger  btn-info-full btnGuardarBorrador">Guardar Borrador</button></li>
+                <li><button type="button" id="btnGuardar" class="btn btn-primary btn-info-full btnGuardar">Guardar final</button></li>*@
+                                    </ul>
+                                </div>
+
+                                <div id="navpills-8" class="tab-pane">
+                                    <div class="alert alert-info alert-rounded">
+                                        <p>Si ha sido invitado a una entrevista de pre-selección para cruceros, deberá adjuntar los siguientes documentos. Si no cuenta con todos los documentos en este momento, cargue sólo aquellos que posee para poder asistir a la entrevista. Recuerde que deberá completarlos en los próximos días.</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Copia del pasaporte</label>
+                                                <input type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp">
+                                                <p class="text-red">Leyenda: Sólo la página con datos personales y fotografía.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Certificado de trabajo 1</label>
+                                                <input type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp">
+                                                <p class="text-red">Leyenda: Sólo es necesario presentar las copias de los 2 últimos trabajos, pero puede añadir más si lo desea</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="alert alert-info alert-rounded">
+                                            <p>Leyenda: *SOLO SI YA ha trabajado en barcos de crucero, por favor inserte:</p>
+                                        </div>
+                                        <label></label>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <label>Copia de visa C1/</label>
+                                                <input type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp">
+                                                <p class="help-block"></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-primary prev-step">Anterior</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step">Siguiente</button></li>
+                                        @*<li><button type="button" id="btnGuardarBorrador" class="btn btn-danger  btn-info-full btnGuardarBorrador">Guardar Borrador</button></li>*@
+                                        <li><button type="button" id="btnGuardar" class="btn btn-success btn-info-full btnGuardar">Enviar</button></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                              
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    
+<script src="~/Content/assets/plugins/jquery/jquery.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/minisidebar/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="~/Content/minisidebar/js/waves.js"></script>
+<script src="~/Content/minisidebar/js/sidebarmenu.js"></script>
+<script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="~/Content/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="~/Content/minisidebar/js/custom.min.js"></script>
+<script src="~/Content/assets/plugins/moment/moment.js"></script>
+
+<script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
+<script src="~/Content/assets/plugins/chartist-js/dist/chartist.min.js"></script>
+<script src="~/Content/assets/plugins/datatables/datatables.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="~/Content/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js"></script>
+<script src="~/Content/assets/plugins/dff/dff.js"></script>
+<script src="~/Content/minisidebar/js/dashboard1.js"></script>
+<script src="~/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+<script src="~/Content/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
+<script src="~/Content/assets/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Content/assets/plugins/sweetalert/jquery.sweet-alert.custom.js"></script>
+<script src="~/Content/JsController/Interesado/RegistroInteresado.js"></script>
+@*<script type="text/javascript">
+        var jQuery_3_3_1 = $.noConflict();
+    </script>*@
+<script>
+    // MAterial Date picker
+    $('#FechaN').bootstrapMaterialDatePicker({ weekStart: 0, time: false, format: 'DD/MM/YYYY' });
+    $('#timepicker').bootstrapMaterialDatePicker({ format: 'HH:mm', time: true, date: false });
+    $('#date-format').bootstrapMaterialDatePicker({ format: 'dddd DD MMMM YYYY - HH:mm' });
+    $('#min-date').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', minDate: new Date() });
+
+    // Date Picker
+    jQuery('.mydatepicker, #datepicker').datepicker();
+    jQuery('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+    jQuery('#date-range').datepicker({
+        toggleActive: true
+    });
+    jQuery('#datepicker-inline').datepicker({
+        todayHighlight: true
+    });
+
+
+
+</script>
+
+
+
+<script>
+    jQuery(document).ready(function () {
+        // Switchery
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        $('.js-switch').each(function () {
+            new Switchery($(this)[0], $(this).data());
+        });
+        // For select 2
+        $(".select2").select2();
+        $('.selectpicker').selectpicker();
+        //Bootstrap-TouchSpin
+        $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        var vspinTrue = $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        if (vspinTrue) {
+            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+        }
+        $("input[name='tch1']").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 0.1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '%'
+        });
+        $("input[name='tch2']").TouchSpin({
+            min: -1000000000,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000,
+            prefix: '$'
+        });
+        $("input[name='tch3']").TouchSpin();
+        $("input[name='tch3_22']").TouchSpin({
+            initval: 40
+        });
+        $("input[name='tch5']").TouchSpin({
+            prefix: "pre",
+            postfix: "post"
+        });
+        // For multiselect
+        $('#pre-selected-options').multiSelect();
+        $('#optgroup').multiSelect({
+            selectableOptgroup: true
+        });
+        $('#public-methods').multiSelect();
+        $('#select-all').click(function () {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').click(function () {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#refresh').on('click', function () {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function () {
+            $('#public-methods').multiSelect('addOption', {
+                value: 42,
+                text: 'test 42',
+                index: 0
+            });
+            return false;
+        });
+        $(".ajax").select2({
+            ajax: {
+                url: "https://api.github.com/search/repositories",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            //templateResult: formatRepo, // omitted for brevity, see the source of this page
+            //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+
+
+    });
+
+    $(document).ready(function () {
+
+        ProgressHide();
+
+        //Initialize tooltips
+        $('.nav-tabs > li a[title]').tooltip();
+
+        //Wizard
+        $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+            var $target = $(e.target);
+            if ($target.parent().hasClass('disabled')) {
+                return false;
+            }
+        });
+
+        $(".next-step").click(function (e) {
+            var $active = $('.wizard .nav-tabs li.active');
+            $active.next().removeClass('disabled');
+            nextTab($active);
+
+
+        });
+        $(".prev-step").click(function (e) {
+            var $active = $('.wizard .nav-tabs li.active');
+            prevTab($active);
+        });
+
+    });
+
+    function nextTab(elem) {
+        $(elem).next().find('a[data-toggle="tab"]').click();
+    }
+    function prevTab(elem) {
+        $(elem).prev().find('a[data-toggle="tab"]').click();
+    }
+</script>

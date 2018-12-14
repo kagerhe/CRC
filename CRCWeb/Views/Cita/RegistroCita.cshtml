@@ -1,0 +1,293 @@
+﻿@*@model CRCWeb.Models.Interesado*@
+@{
+    /**/
+
+    /**/
+
+    /**/
+
+    /**/
+
+    /**/
+
+    /**/
+
+    ViewBag.Title = "RegistroCita";
+}
+
+<link rel="icon" type="image/png" sizes="16x16" href="~/Content/assets/images/favicon.png">
+
+<link href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/calendar/dist/fullcalendar.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/style.css" rel="stylesheet" />
+<link href="~/Content/minisidebar/css/colors/blue-dark.css" id="theme" rel="stylesheet" />
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="card-body">
+                            @*  <h4 class="card-title m-t-10">Drag & Drop Event</h4>*@
+                            <div class="row">
+                                @* <div class="col-md-12">
+                                    <div id="calendar-events" class="">
+                                         <div class="calendar-events" data-class="bg-info"><i class="fa fa-circle text-info"></i> My Event One</div>
+                                         <div class="calendar-events" data-class="bg-success"><i class="fa fa-circle text-success"></i> My Event Two</div>
+                                         <div class="calendar-events" data-class="bg-danger"><i class="fa fa-circle text-danger"></i> My Event Three</div>
+                                         <div class="calendar-events" data-class="bg-warning"><i class="fa fa-circle text-warning"></i> My Event Four</div>
+                                     </div>*@
+                                <!-- checkbox -->
+                                @*<div class="checkbox m-t-20">
+                                        <input id="drop-remove" type="checkbox">
+                                        <label for="drop-remove">
+                                            Remove after drop
+                                        </label>
+                                    </div>*@
+                                @*<a href="#" data-toggle="modal" data-target="#add-new-event" class="btn m-t-10 btn-info btn-block waves-effect waves-light">
+                                        <i class="ti-plus"></i> Add New Event
+                                    </a>
+                                                        </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card-body b-l calender-sidebar">
+                            <div id="calendar" data-toggle="modal" data-target="#modal-default"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BEGIN MODAL -->
+<div class="modal none-border" id="modal-default">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><strong>Agregar Cita</strong></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Tipo Doc.</label>
+
+                            <select id="tipod" class="form-control show-tick">
+                                <option selected>Seleccione...</option>
+                                <option value="1">DNI</option>
+                                <option value="2">CE</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nro Doc.</label>
+                            <div class="form-line">
+                                <input type="text" id="nro_doc" class="form-control" placeholder="Numero documento identidad">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Apellido Paterno</label>
+                            <div class="form-line">
+                                <input id="apellidoP" type="text" class="form-control">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Apellido Materno</label>
+                            <div class="form-line">
+                                <input id="apellidoM" type="text" class="form-control">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nombres</label>
+                            <div class="form-line">
+                                <input type="text" id="nombres" class="form-control">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nombre de preferencia</label>
+                            <div class="form-line">
+                                <input type="text" id="nombres" class="form-control">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Teléfono celular</label>
+                            <input type="text" id="TelefonoC" class="form-control">
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Estado</label>
+                            <select class="form-control custom-select" id="formacontacto" data-placeholder="Choose a Category" tabindex="1">
+                                <option selected>Seleccione...</option>
+                                <option value="1">Show</option>
+                                <option value="2">No Show</option>
+                                <option value="3">Posponer</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Usuario creador</label>
+                            <div class="form-line">
+                                <input type="text" id="usuario" class="form-control" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <label class="m-t-20">Hora ingreso </label>
+                        <input class="form-control" id="timepicker" placeholder="Check time">
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Observacion</label>
+                            <textarea class="form-control" rows="3" id="Observacion"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success save-event waves-effect waves-light">Crear Cita</button>
+                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap tether Core JavaScript -->
+<script src="~/Content/assets/plugins/jquery/jquery.min.js"></script>
+
+<script src="~/Content/assets/plugins/calendar/jquery-ui.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/minisidebar/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="~/Content/minisidebar/js/waves.js"></script>
+<script src="~/Content/minisidebar/js/sidebarmenu.js"></script>
+<script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="~/Content/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="~/Content/minisidebar/js/custom.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="~/Content/assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="~/Content/assets/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="~/Content/assets/plugins/moment/moment.js"></script>
+<script src="~/Content/assets/plugins/calendar/dist/fullcalendar.min.js"></script>
+<script src="~/Content/assets/plugins/calendar/dist/cal-init.js"></script>
+<script src="~/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+<script>
+    // MAterial Date picker
+    $('#mdate').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
+    $('#timepicker').bootstrapMaterialDatePicker({ format: 'HH:mm', time: true, date: false });
+    $('#date-format').bootstrapMaterialDatePicker({ format: 'dddd DD MMMM YYYY - HH:mm' });
+
+    $('#min-date').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', minDate: new Date() });
+    // Clock pickers
+    $('#single-input').clockpicker({
+        placement: 'bottom',
+        align: 'left',
+        autoclose: true,
+        'default': 'now'
+    });
+    $('.clockpicker').clockpicker({
+        donetext: 'Done',
+    }).find('input').change(function () {
+        console.log(this.value);
+    });
+    $('#check-minutes').click(function (e) {
+        // Have to stop propagation here
+        e.stopPropagation();
+        input.clockpicker('show').clockpicker('toggleView', 'minutes');
+    });
+    if (/mobile/i.test(navigator.userAgent)) {
+        $('input').prop('readOnly', true);
+    }
+    // Colorpicker
+    $(".colorpicker").asColorPicker();
+    $(".complex-colorpicker").asColorPicker({
+        mode: 'complex'
+    });
+    $(".gradient-colorpicker").asColorPicker({
+        mode: 'gradient'
+    });
+    // Date Picker
+    jQuery('.mydatepicker, #datepicker').datepicker();
+    jQuery('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+    jQuery('#date-range').datepicker({
+        toggleActive: true
+    });
+    jQuery('#datepicker-inline').datepicker({
+        todayHighlight: true
+    });
+    // Daterange picker
+    $('.input-daterange-datepicker').daterangepicker({
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-danger',
+        cancelClass: 'btn-inverse'
+    });
+    $('.input-daterange-timepicker').daterangepicker({
+        timePicker: true,
+        format: 'MM/DD/YYYY h:mm A',
+        timePickerIncrement: 30,
+        timePicker12Hour: true,
+        timePickerSeconds: false,
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-danger',
+        cancelClass: 'btn-inverse'
+    });
+    $('.input-limit-datepicker').daterangepicker({
+        format: 'MM/DD/YYYY',
+        minDate: '06/01/2015',
+        maxDate: '06/30/2015',
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-danger',
+        cancelClass: 'btn-inverse',
+        dateLimit: {
+            days: 6
+        }
+    });
+</script>
+
+
+
